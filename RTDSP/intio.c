@@ -241,4 +241,5 @@ void ISR_AIC(void)
 	}
 	// output result to both L/R channels
 	mono_write_16Bit( (short) dOutput );
+	;
 }

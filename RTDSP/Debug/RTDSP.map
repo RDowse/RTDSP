@@ -1,7 +1,7 @@
 ******************************************************************************
                TMS320C6x Linker PC v6.1.15                     
 ******************************************************************************
->> Linked Mon Feb 22 12:44:24 2016
+>> Linked Mon Feb 22 12:55:03 2016
 
 OUTPUT FILE NAME:   <RTDSP.out>
 ENTRY POINT SYMBOL: "_c_int00"  address: 0000a3e0
@@ -974,8 +974,8 @@ ffffffff   ___c_args__
 00007bf8   _b
 0000a3e0   _c_int00
 00005ec0   _call_dtors
-00004b1c   _circular_buffer
-000047e8   _circular_buffer_symm
+00004b1c   _circular_filter
+000047e8   _circular_filter_symm
 000045cc   _convolution
 0000aff8   _dInput
 0000b000   _dOutput
@@ -1407,8 +1407,8 @@ address    name
 00004514   _init_HWI
 000045a0   _main
 000045cc   _convolution
-000047e8   _circular_buffer_symm
-00004b1c   _circular_buffer
+000047e8   _circular_filter_symm
+00004b1c   _circular_filter
 00004c80   _ISR_AIC
 00004d80   _DSK6713_wait
 00004e20   GBL_CLKIN
