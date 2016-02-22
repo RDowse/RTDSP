@@ -160,6 +160,11 @@ void shift_buffer(double sample_in)
 	x[0] = sample_in; 
 }
 
+void noncircular_filter(double sample_in){
+	dOutput = convolution(sample_in);
+	shift_buffer(dInput);
+}
+
 double circular_filter(double sample_in){
 	short i;
 	double sum = 0;
@@ -229,9 +234,7 @@ void ISR_AIC(void)
 	dInput = (double) mono_read_16Bit();
 	// convolve and shift buffer
 	if (selectFIR == 0){
-		dOutput = convolution(dInput);
-		shift_buffer(dInput);
-		// dOutput = noncircular_filter(dInput);
+		dOutput = noncircular_filter(dInput);
 	}
 	else if (selectFIR == 1){
 		dOutput = circular_filter(dInput);
