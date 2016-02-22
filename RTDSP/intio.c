@@ -93,6 +93,7 @@ void   init_HWI(void);
 void   ISR_AIC(void);  
 double noncircular_filter(double sample_in);
 void   shift_buffer(double sample_in);
+double circular_filter_modulo(double sample_in);
 double circular_filter(double sample_in);
 double circular_filter_symm(double sample_in);
 double convolution(double currentInput);
@@ -175,12 +176,30 @@ void shift_buffer(double sample_in)
 	x[0] = sample_in; 
 }
 
+double circular_filter_modulo(double sample_in){
+	short i;
+	double sum = 0;
+	// do convolution sequentially from coefficient b0 to bM
+	sum += b[0] * sample_in ; // convolution with coefficient 0
+	for (i=0; i<M; i++)
+	{
+		// convolution with coefficients 1 to M
+		sum += b[i+1] * x[ (M+pBuf-i)%M ];
+	}
+	// then store current sample in incremented position in buffer,
+	// wrapping around if attempting to go past last entry in buffer
+	++pBuf;
+	pBuf = pBuf % M;
+	x[pBuf] = sample_in;
+	return sum;
+}
+
 double circular_filter(double sample_in){
 	short i;
 	double sum = 0;
 	double *pCoeff = b;
 	// do convolution sequentially from coefficient b0 to bM
-	sum += sample_in * *(pCoeff++); // convolution with coefficient 0
+	sum += *(pCoeff++) * sample_in; // convolution with coefficient 0
 	for (i=pBuf; i>=0; i--)
 	{
 		sum += *(pCoeff++) * x[i]; // convolution with left part of buffer
@@ -204,7 +223,7 @@ double circular_filter_symm(double sample_in){
 	short pBufL = pBuf; // initially points to x[1], runs to x[M/2] 
 	// do convolution in pairs, leveraging on symmetry of b[] coefficients
 	if (pBufR == M) pBufR = 0; // wraparound
-	sum += (sample_in + x[pBufR++]) * *(pCoeff++); // convolution with coefficient 0 and M-1
+	sum += *(pCoeff++) * (sample_in + x[pBufR++]); // convolution with coefficient 0 and M-1
 	for (i=1; i<M/2; i++)
 	{
 		// deal with wraparound of pBufL and pBufR
@@ -213,11 +232,11 @@ double circular_filter_symm(double sample_in){
 		// convolve with coefficients i and M-1-i
 		// also increment buffer pointers
 		// (decrement pBufL because it moves leftwards through buffer)
-		sum += (x[pBufL--] + x[pBufR++]) * *(pCoeff++);
+		sum += *(pCoeff++) * (x[pBufL--] + x[pBufR++]);
 	}
 	// special case for coefficient M/2
 	if (pBufR == M) pBufR = 0;
-	sum += x[pBufR] * *(pCoeff);
+	sum += *(pCoeff) * x[pBufR];
 	// increment buffer ptr, wrapping around if 0
 	if (++pBuf == M) pBuf = 0;
 	// then store current sample in incremented position in buffer
@@ -237,9 +256,12 @@ void ISR_AIC(void)
 			dOutput = noncircular_filter(dInput);
 			break;
 		case 1:
-			dOutput = circular_filter(dInput);
+			dOutput = circular_filter_modulo(dInput);
 			break;
 		case 2:
+			dOutput = circular_filter(dInput);
+			break;
+		case 3:
 			dOutput = circular_filter_symm(dInput);
 			break;
 	}

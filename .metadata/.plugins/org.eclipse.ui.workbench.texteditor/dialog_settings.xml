@@ -8,14 +8,18 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="sine_init"/>
+		<item key="selection" value="bool"/>
 		<item key="wrap" value="false"/>
 		<item key="casesensitive" value="false"/>
 		<list key="findhistory">
+			<item value="bool"/>
+			<item value="BUFFER_"/>
+			<item value="BUFFER"/>
+			<item value="buffersele"/>
+			<item value="HEAD"/>
 			<item value="sine_init"/>
 			<item value="advance_sample"/>
 			<item value="float"/>
-			<item value="DSK6713_AIC23_write"/>
 		</list>
 		<list key="replacehistory">
 		</list>

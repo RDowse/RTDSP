@@ -43,8 +43,8 @@
 </editor>
 </editors>
 <views>
-<view id="com.ti.ccstudio.debug.registers.ui.Expressions" partName="Watch (2)">
-<viewState StatesFile="H:/RTDSPlab/lab4/.metadata/.plugins/com.ti.ccstudio.debug.registers.ui/expressions.xml" columnName.0="Name" columnName.1="Value" columnName.2="Address" columnName.3="Type" columnName.4="Format" columnWidth.0="150" columnWidth.1="150" columnWidth.2="150" columnWidth.3="150" columnWidth.4="80" numberOfVisibleColumns="5"/>
+<view id="com.ti.ccstudio.debug.registers.ui.Expressions" partName="Watch (1)">
+<viewState StatesFile="H:/RTDSPlab/lab4/.metadata/.plugins/com.ti.ccstudio.debug.registers.ui/expressions.xml" columnName.0="Name" columnName.1="Value" columnName.2="Address" columnName.3="Type" columnName.4="Format" columnWidth.0="150" columnWidth.1="304" columnWidth.2="150" columnWidth.3="150" columnWidth.4="80" numberOfVisibleColumns="5"/>
 </view>
 <view id="org.eclipse.ui.cheatsheets.views.CheatSheetView" partName="Cheat Sheets">
 <viewState>
@@ -62,7 +62,6 @@
 <expanded>
 <element path="H:\RTDSPlab\lab4\RTDSP"/>
 </expanded>
-<selection/>
 <customFilters userDefinedPatternsEnabled="false">
 <xmlDefinedFilters>
 <child filterId="org.eclipse.cdt.internal.ui.CView.ArchiveFilter" isEnabled="false"/>
@@ -91,11 +90,11 @@
 <view id="com.ti.ccstudio.debug.registers.ui.Variables" partName="Local (1)">
 <viewState columnName.0="Name" columnName.1="Value" columnName.2="Address" columnName.3="Type" columnName.4="Format" columnWidth.0="150" columnWidth.1="150" columnWidth.2="150" columnWidth.3="150" columnWidth.4="80" numberOfVisibleColumns="5"/>
 </view>
-<view id="com.ti.ccstudio.debug.ui.TIDisassemblyView" partName="Disassembly (circular_buffer_symm + 0x3c)">
+<view id="com.ti.ccstudio.debug.ui.TIDisassemblyView" partName="Disassembly (main)">
 <viewState/>
 </view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
-<viewState columnWidth0="525" columnWidth1="111" columnWidth2="186" columnWidth3="96" columnWidth4="0" horizontalPosition="0" verticalPosition="0">
+<viewState columnWidth0="528" columnWidth1="114" columnWidth2="189" columnWidth3="99" columnWidth4="0" horizontalPosition="0" verticalPosition="0">
 <columnOrder columnOrderIndex="0"/>
 <columnOrder columnOrderIndex="1"/>
 <columnOrder columnOrderIndex="2"/>
@@ -274,10 +273,10 @@
 <layout>
 <mainWindow>
 <info folder="true" part="org.eclipse.debug.internal.ui.ToolsFolderView">
-<folder activePageID="com.ti.ccstudio.debug.registers.ui.Variables" appearance="2" expanded="2">
+<folder activePageID="com.ti.ccstudio.debug.registers.ui.Expressions" appearance="2" expanded="2">
 <page content="com.ti.ccstudio.debug.registers.ui.Variables" label="Local (1)"/>
 <page content="com.ti.ccstudio.debug.registers.ui.Registers" label="LabelNotFound"/>
-<page content="com.ti.ccstudio.debug.registers.ui.Expressions" label="Watch (2)"/>
+<page content="com.ti.ccstudio.debug.registers.ui.Expressions" label="Watch (1)"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
@@ -317,7 +316,7 @@
 <info part="org.eclipse.ui.editorss" ratio="0.25249642" ratioLeft="177" ratioRight="524" relationship="4" relative="org.eclipse.debug.internal.ui.ToolsFolderView"/>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@1516432" ratio="0.7497382" ratioLeft="1432" ratioRight="478" relationship="2" relative="org.eclipse.ui.editorss">
 <folder activePageID="com.ti.ccstudio.debug.ui.TIDisassemblyView" appearance="2" expanded="2">
-<page content="com.ti.ccstudio.debug.ui.TIDisassemblyView" label="Disassembly (circular_buffer_symm + 0x3c)"/>
+<page content="com.ti.ccstudio.debug.ui.TIDisassemblyView" label="Disassembly (main)"/>
 <page content="com.ti.ccstudio.memory.ui.view.TIMemoryView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
 <page content="com.ti.ccstudio.debug.ui.views.KernelObjects" label="LabelNotFound"/>
@@ -347,157 +346,156 @@
 <navigationHistory>
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/RTDSP/intio.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/RTDSP/fir_coeff.txt"/>
 </editors>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
+<position info="not_deleted" x="9103" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
+<position info="not_deleted" x="9142" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
+<position info="not_deleted" x="8688" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
+<position info="not_deleted" x="8777" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
+<position info="not_deleted" x="9004" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
+<position info="not_deleted" x="8980" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
+<position info="not_deleted" x="9103" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4142" y="0"/>
+<position info="not_deleted" x="9142" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="3911" y="0"/>
+<position info="not_deleted" x="8688" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4053" y="0"/>
+<position info="not_deleted" x="8777" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
+<position info="not_deleted" x="8943" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
+<position info="not_deleted" x="9103" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
+<position info="not_deleted" x="9142" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
+<position info="not_deleted" x="8688" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
+<position info="not_deleted" x="8777" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
+<position info="not_deleted" x="8811" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
+<position info="not_deleted" x="9103" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
+<position info="not_deleted" x="9142" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
+<position info="not_deleted" x="8688" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
+<position info="not_deleted" x="8777" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
+<position info="not_deleted" x="8811" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
+<position info="not_deleted" x="9004" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4093" y="0"/>
+<position info="not_deleted" x="8777" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4290" y="0"/>
+<position info="not_deleted" x="9004" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="1379" y="0"/>
-</item>
-<item historyLabel="fir_coeff.txt" index="1">
-<position/>
+<position info="not_deleted" x="8663" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="1379" y="0"/>
+<position info="not_deleted" x="4199" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="8356" y="0"/>
+<position info="not_deleted" x="8777" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4093" y="0"/>
+<position info="not_deleted" x="9004" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4298" y="0"/>
+<position info="not_deleted" x="9103" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="6784" y="0"/>
+<position info="not_deleted" x="9142" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="7747" y="0"/>
+<position info="not_deleted" x="8688" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="7748" y="0"/>
+<position info="not_deleted" x="8777" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="6784" y="0"/>
+<position info="not_deleted" x="9142" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="7747" y="0"/>
+<position info="not_deleted" x="8688" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="6784" y="0"/>
+<position info="not_deleted" x="9142" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="7747" y="0"/>
+<position info="not_deleted" x="8688" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="6784" y="0"/>
+<position info="not_deleted" x="9142" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="7747" y="0"/>
+<position info="not_deleted" x="8688" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="7342" y="0"/>
+<position info="not_deleted" x="9142" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4093" y="0"/>
+<position info="not_deleted" x="8688" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="6784" y="0"/>
+<position info="not_deleted" x="9142" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="7747" y="0"/>
+<position info="not_deleted" x="8688" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="6784" y="0"/>
+<position info="not_deleted" x="9142" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="7747" y="0"/>
+<position info="not_deleted" x="8930" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="6784" y="0"/>
+<position info="not_deleted" x="4199" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="7747" y="0"/>
+<position info="not_deleted" x="8688" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="6784" y="0"/>
+<position info="not_deleted" x="6864" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="7747" y="0"/>
+<position info="not_deleted" x="4199" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="4133" y="0"/>
 </item>
 <item active="true" historyLabel="intio.c" index="0">
-<position info="not_deleted" x="6784" y="0"/>
+<position info="not_deleted" x="4199" y="0"/>
 </item>
 </navigationHistory>
 <stickyState>
