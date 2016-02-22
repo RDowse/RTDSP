@@ -84,15 +84,17 @@ double dOutput;
 double x[M] = {0};
 // ptr to most recent element in buffer
 short pBuf = 0;
+//circular 1 or shift buffer 0
+short selectFIR = 2;
 
  /******************************* Function prototypes ********************************/
 void   init_hardware(void);     
 void   init_HWI(void);
 void   ISR_AIC(void);  
-void   shift_buffer(double sample_in, double* x);
-double circular_buffer(double sample_in, double* x);
-double circular_buffer_symm(double sample_in, double* x);
-double convolution(double currentInput, double* x);
+void   noncircular_filter(double sample_in);
+double circular_filter(double sample_in);
+double circular_filter_symm(double sample_in);
+double convolution(double currentInput);
 /********************************** Main routine ************************************/
 void main()
 {
@@ -147,7 +149,7 @@ void init_HWI(void)
 
 /*************************** Signal processing functions ******************************/  
 
-void shift_buffer(double sample_in, double* x)
+void shift_buffer(double sample_in)
 {
 	short i;
 	// shifts buffer x[]
@@ -158,19 +160,19 @@ void shift_buffer(double sample_in, double* x)
 	x[0] = sample_in; 
 }
 
-double circular_buffer(double sample_in, double* x){
+double circular_filter(double sample_in){
 	short i;
 	double sum = 0;
-	double *bSeqPtr = b;
+	double *pCoeff = b;
 	// do convolution sequentially from coefficient b0 to bM
-	sum += sample_in * *(bSeqPtr++); // convolution with coefficient 0
+	sum += sample_in * *(pCoeff++); // convolution with coefficient 0
 	for (i=pBuf; i>=0; i--)
 	{
-		sum += *(bSeqPtr++) * x[i]; // convolution with left part of buffer
+		sum += *(pCoeff++) * x[i]; // convolution with left part of buffer
 	}
 	for (i=M-1; i>pBuf; i--)
 	{
-		sum += *(bSeqPtr++) * x[i]; // convolution with right part of buffer
+		sum += *(pCoeff++) * x[i]; // convolution with right part of buffer
 	}
 	// increment buffer ptr, wrapping around if 0
 	if (++pBuf == M) pBuf = 0;
@@ -179,15 +181,15 @@ double circular_buffer(double sample_in, double* x){
 	return sum;
 }
 
-double circular_buffer_symm(double sample_in, double* x){
+double circular_filter_symm(double sample_in){
 	short i;
 	double sum = 0;
-	double *bSeqPtr = b;
+	double *pCoeff = b;
 	short pBufR = pBuf + 1; // initially points to x[M-1], runs to x[M/2]
 	short pBufL = pBuf; // initially points to x[1], runs to x[M/2] 
 	// do convolution in pairs, leveraging on symmetry of b[] coefficients
 	if (pBufR == M) pBufR = 0; // wraparound
-	sum += (sample_in + x[pBufR++]) * *(bSeqPtr); // convolution with coefficient 0 and M-1
+	sum += (sample_in + x[pBufR++]) * *(pCoeff++); // convolution with coefficient 0 and M-1
 	for (i=1; i<M/2; i++)
 	{
 		// deal with wraparound of pBufL and pBufR
@@ -196,11 +198,11 @@ double circular_buffer_symm(double sample_in, double* x){
 		// convolve with coefficients i and M-1-i
 		// also increment buffer pointers
 		// (decrement pBufL as it moves leftwards through buffer)
-		sum += (x[pBufL--] + x[pBufR++]) * *(bSeqPtr++);
+		sum += (x[pBufL--] + x[pBufR++]) * *(pCoeff++);
 	}
 	// special case for coefficient M/2
 	if (pBufR == M) pBufR = 0;
-	sum += x[pBufR] * *(bSeqPtr);
+	sum += x[pBufR] * *(pCoeff);
 	// increment buffer ptr, wrapping around if 0
 	if (++pBuf == M) pBuf = 0;
 	// then store current sample in incremented position in buffer
@@ -208,7 +210,7 @@ double circular_buffer_symm(double sample_in, double* x){
 	return sum;
 }
 
-double convolution(double currentInput, double* x) {
+double convolution(double currentInput) {
 	short i;
 	double sum = 0;
 	sum += currentInput * b[0]; // convolution with coefficient 0
@@ -226,10 +228,17 @@ void ISR_AIC(void)
 	// get new sample
 	dInput = (double) mono_read_16Bit();
 	// convolve and shift buffer
-	//dOutput = convolution(dInput, x);
-	//shift_buffer(dInput, x);
-	// dOutput = circular_buffer(dInput, x);
-	dOutput = circular_buffer_symm(dInput, x);
+	if (selectFIR == 0){
+		dOutput = convolution(dInput);
+		shift_buffer(dInput);
+		// dOutput = noncircular_filter(dInput);
+	}
+	else if (selectFIR == 1){
+		dOutput = circular_filter(dInput);
+	}
+	else if (selectFIR == 2){
+		dOutput = circular_filter_symm(dInput);
+	}
 	// output result to both L/R channels
 	mono_write_16Bit( (short) dOutput );
 }
