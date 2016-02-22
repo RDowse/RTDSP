@@ -91,7 +91,8 @@ short selectFIR = 2;
 void   init_hardware(void);     
 void   init_HWI(void);
 void   ISR_AIC(void);  
-void   noncircular_filter(double sample_in);
+double noncircular_filter(double sample_in);
+void   shift_buffer(double sample_in);
 double circular_filter(double sample_in);
 double circular_filter_symm(double sample_in);
 double convolution(double currentInput);
@@ -149,6 +150,20 @@ void init_HWI(void)
 
 /*************************** Signal processing functions ******************************/  
 
+double noncircular_filter(double sample_in){
+	short i;
+	double sum = 0;
+	// Perform convolution
+	sum += sample_in * b[0]; // convolution with coefficient 0
+	for (i=0; i<M; i++)
+	{
+		sum += b[M-i] * x[i]; // convolution with coefficients 1 to M
+	}
+	// Perform buffer shift (delay)
+	shift_buffer(sample_in);
+	return sum;
+}
+
 void shift_buffer(double sample_in)
 {
 	short i;
@@ -158,11 +173,6 @@ void shift_buffer(double sample_in)
 		x[i]=x[i-1]; /* move data along buffer from lower */
 	} /* element to next higher */
 	x[0] = sample_in; 
-}
-
-void noncircular_filter(double sample_in){
-	dOutput = convolution(sample_in);
-	shift_buffer(dInput);
 }
 
 double circular_filter(double sample_in){
@@ -202,7 +212,7 @@ double circular_filter_symm(double sample_in){
 		if (pBufL == -1) pBufL = M-1;
 		// convolve with coefficients i and M-1-i
 		// also increment buffer pointers
-		// (decrement pBufL as it moves leftwards through buffer)
+		// (decrement pBufL because it moves leftwards through buffer)
 		sum += (x[pBufL--] + x[pBufR++]) * *(pCoeff++);
 	}
 	// special case for coefficient M/2
@@ -215,34 +225,24 @@ double circular_filter_symm(double sample_in){
 	return sum;
 }
 
-double convolution(double currentInput) {
-	short i;
-	double sum = 0;
-	sum += currentInput * b[0]; // convolution with coefficient 0
-	for (i=0; i<M; i++)
-	{
-		sum += b[M-i] * x[i]; // convolution with coefficients 1 to M
-	}
-	return sum;
-}
-
 /******************** INTERRUPT SERVICE ROUTINE ***********************/  
 
 void ISR_AIC(void)
 {
 	// get new sample
 	dInput = (double) mono_read_16Bit();
-	// convolve and shift buffer
-	if (selectFIR == 0){
-		dOutput = noncircular_filter(dInput);
-	}
-	else if (selectFIR == 1){
-		dOutput = circular_filter(dInput);
-	}
-	else if (selectFIR == 2){
-		dOutput = circular_filter_symm(dInput);
+	// filtering using method selected by selectFIR
+	switch (selectFIR) {
+		case 0:
+			dOutput = noncircular_filter(dInput);
+			break;
+		case 1:
+			dOutput = circular_filter(dInput);
+			break;
+		case 2:
+			dOutput = circular_filter_symm(dInput);
+			break;
 	}
 	// output result to both L/R channels
 	mono_write_16Bit( (short) dOutput );
-	;
 }
