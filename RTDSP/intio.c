@@ -50,6 +50,9 @@
 //sampling frequency as defind in Config
 #define SAMP_FREQ 8000
 
+//circular 1 or shift buffer 0
+#define BUFFER_SELECT 1
+
 /******************************* Global declarations ********************************/
 
 /* Audio port configuration settings: these values set registers in the AIC23 audio 
@@ -197,9 +200,12 @@ void ISR_AIC(void)
 	// get new sample
 	dInput = (double) mono_read_16Bit();
 	// convolve and shift buffer
-	//dOutput = convolution(sInput, x);
+	if(BUFFER_SELECT == 1){
+		dOutput = convolution(dInput, x);
+	} else if(BUFFER_SELECT == 0){
+		dOutput = circular_buffer(dInput, x);
+	}
 	//shift_buffer(sInput, x);
-	dOutput = circular_buffer(dInput, x);
 	// output result to both L/R channels
 	mono_write_16Bit( (short) dOutput );
 }
