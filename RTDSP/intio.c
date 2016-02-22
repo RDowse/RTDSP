@@ -77,23 +77,24 @@ DSK6713_AIC23_CodecHandle H_Codec;
 
 // creates boolean type
 typedef enum { false, true } bool;
-// has interrupt occured?
-bool outReady = false;
+// Current x[i] and y[i]
+double dInput;
+double dOutput;
+// signal buffer of size M 
+double x[M] = {0};
+// ptr to most recent element in buffer
+short pBuf = 0;
 
  /******************************* Function prototypes ********************************/
 void   init_hardware(void);     
 void   init_HWI(void);
 void   ISR_AIC(void);  
-void shift_buffer(double sample_in, short* x);
-double convolution(short currentInput, short* x);
+void   shift_buffer(double sample_in, double* x);
+double circular_buffer(double sample_in, double* x);
+double convolution(double currentInput, double* x);
 /********************************** Main routine ************************************/
 void main()
 {
-	// Current x[i] and y[i]
-	short sInput;
-	double dOutput;
-	// signal buffer of size M 
-	short x[M] = {0};
 	
 	// initialize board and the audio port
 	init_hardware();
@@ -103,21 +104,7 @@ void main()
   	 		
 	/* loop indefinitely, waiting for interrupts */  					
 	while(1) 
-  	{
-  		// interrupt just occurred. 
-  		if (outReady)
-  		{
-  			// get new sample
-  			sInput = mono_read_16Bit();
-  			// convolve and shift buffer
-			dOutput = convolution(sInput, x);
-			shift_buffer(sInput, x);
-			// output result to both L/R channels
-			mono_write_16Bit( (short) dOutput );
-			// unflag; processor now waits for next interrupt
-			outReady = false;
-	  	}
-  	};
+  	{};
   
 }
         
@@ -159,38 +146,9 @@ void init_HWI(void)
 
 /*************************** Signal processing functions ******************************/  
 
-//void sine_init(void)
-//{	
-///*  Initialises an array (table[]) of sine values. */
-//	int i;
-//	for (i = 0; i < SINE_TABLE_SIZE; i++) {
-//		table[i] = (short) ((1<<14) * sin(2*i*PI/SINE_TABLE_SIZE));
-//	}
-//}
-//
-//short advance_sample(double* index)
-//{
-///* Returns sine table value pointed by current index.
-// * Then advances sine table index. */ 
-// 	short res = table[(int) floor(*index)];
-//	*index += ((double) (sineFreq*SINE_TABLE_SIZE)) / SAMP_FREQ;
-//	// Ensures that count loops back if it exceeds the table size
-//	while (*index >= SINE_TABLE_SIZE) *index -= SINE_TABLE_SIZE;
-//	return res;
-//}
-//
-//short rectify_sample(short sample)
-//{
-///* rectifies input sample */
-//	short temp = sample >> 15;
-//	sample ^= temp;
-//	sample -= temp;
-//	return sample;
-//}
-
-void shift_buffer(double sample_in, short* x)
+void shift_buffer(double sample_in, double* x)
 {
-	int i;
+	short i;
 	// shifts buffer x[]
 	for (i=M-1; i>0; i--)
 	{
@@ -199,8 +157,30 @@ void shift_buffer(double sample_in, short* x)
 	x[0] = sample_in; 
 }
 
-double convolution(short currentInput, short* x) {
-	int i;
+double circular_buffer(double sample_in, double* x){
+	short i;
+	short coeff = -1;
+	double sum = 0;
+	double *bSeqPtr = b;
+	// do convolution sequentially from coefficient b0 to bM
+	sum += sample_in * *(bSeqPtr++); // convolution with coefficient 0
+	for (i=pBuf; i>=0; i--)
+	{
+		sum += *(bSeqPtr++) * x[i]; // convolution with left part of buffer
+	}
+	for (i=M-1; i>pBuf; i--)
+	{
+		sum += *(bSeqPtr++) * x[i]; // convolution with right part of buffer
+	}
+	// increment buffer ptr, wrapping around if 0
+	if (++pBuf == M) pBuf = 0;
+	// then store current sample in incremented position in buffer
+	x[pBuf] = sample_in;
+	return sum;
+}
+
+double convolution(double currentInput, double* x) {
+	short i;
 	double sum = 0;
 	sum += currentInput * b[0]; // convolution with coefficient 0
 	for (i=0; i<M; i++)
@@ -214,6 +194,12 @@ double convolution(short currentInput, short* x) {
 
 void ISR_AIC(void)
 {
-	//set flag to show that the output is ready.
-	outReady = true;
+	// get new sample
+	dInput = (double) mono_read_16Bit();
+	// convolve and shift buffer
+	//dOutput = convolution(sInput, x);
+	//shift_buffer(sInput, x);
+	dOutput = circular_buffer(dInput, x);
+	// output result to both L/R channels
+	mono_write_16Bit( (short) dOutput );
 }

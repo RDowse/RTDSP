@@ -8,10 +8,12 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="float"/>
+		<item key="selection" value="sine_init"/>
 		<item key="wrap" value="false"/>
 		<item key="casesensitive" value="false"/>
 		<list key="findhistory">
+			<item value="sine_init"/>
+			<item value="advance_sample"/>
 			<item value="float"/>
 			<item value="DSK6713_AIC23_write"/>
 		</list>
