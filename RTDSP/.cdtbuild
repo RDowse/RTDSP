@@ -35,6 +35,7 @@
 <listOptionValue builtIn="false" value="&quot;CHIP_6713&quot;"/>
 </option>
 <option id="com.ti.ccstudio.buildDefinitions.C6000_6.1.compilerID.OPT_FOR_SPEED.27112612" superClass="com.ti.ccstudio.buildDefinitions.C6000_6.1.compilerID.OPT_FOR_SPEED" value="com.ti.ccstudio.buildDefinitions.C6000_6.1.compilerID.OPT_FOR_SPEED.2" valueType="enumerated"/>
+<option id="com.ti.ccstudio.buildDefinitions.C6000_6.1.compilerID.OPT_LEVEL.1360461550" superClass="com.ti.ccstudio.buildDefinitions.C6000_6.1.compilerID.OPT_LEVEL" value="com.ti.ccstudio.buildDefinitions.C6000_6.1.compilerID.OPT_LEVEL.2" valueType="enumerated"/>
 </tool>
 <tool id="com.ti.ccstudio.buildDefinitions.C6000_6.1.exe.linkerDebug.409297109" name="C6000 Linker" superClass="com.ti.ccstudio.buildDefinitions.C6000_6.1.exe.linkerDebug">
 <option id="com.ti.ccstudio.buildDefinitions.C6000_6.1.linkerID.OUTPUT_FILE.267566355" superClass="com.ti.ccstudio.buildDefinitions.C6000_6.1.linkerID.OUTPUT_FILE" value="&quot;RTDSP.out&quot;" valueType="string"/>

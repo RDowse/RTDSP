@@ -91,6 +91,7 @@ void   init_HWI(void);
 void   ISR_AIC(void);  
 void   shift_buffer(double sample_in, double* x);
 double circular_buffer(double sample_in, double* x);
+double circular_buffer_symm(double sample_in, double* x);
 double convolution(double currentInput, double* x);
 /********************************** Main routine ************************************/
 void main()
@@ -159,7 +160,6 @@ void shift_buffer(double sample_in, double* x)
 
 double circular_buffer(double sample_in, double* x){
 	short i;
-	short coeff = -1;
 	double sum = 0;
 	double *bSeqPtr = b;
 	// do convolution sequentially from coefficient b0 to bM
@@ -172,6 +172,35 @@ double circular_buffer(double sample_in, double* x){
 	{
 		sum += *(bSeqPtr++) * x[i]; // convolution with right part of buffer
 	}
+	// increment buffer ptr, wrapping around if 0
+	if (++pBuf == M) pBuf = 0;
+	// then store current sample in incremented position in buffer
+	x[pBuf] = sample_in;
+	return sum;
+}
+
+double circular_buffer_symm(double sample_in, double* x){
+	short i;
+	double sum = 0;
+	double *bSeqPtr = b;
+	short pBufR = pBuf + 1; // initially points to x[M-1], runs to x[M/2]
+	short pBufL = pBuf; // initially points to x[1], runs to x[M/2] 
+	// do convolution in pairs, leveraging on symmetry of b[] coefficients
+	if (pBufR == M) pBufR = 0; // wraparound
+	sum += (sample_in + x[pBufR++]) * *(bSeqPtr); // convolution with coefficient 0 and M-1
+	for (i=1; i<M/2; i++)
+	{
+		// deal with wraparound of pBufL and pBufR
+		if (pBufR == M) pBufR = 0;
+		if (pBufL == -1) pBufL = M-1;
+		// convolve with coefficients i and M-1-i
+		// also increment buffer pointers
+		// (decrement pBufL as it moves leftwards through buffer)
+		sum += (x[pBufL--] + x[pBufR++]) * *(bSeqPtr++);
+	}
+	// special case for coefficient M/2
+	if (pBufR == M) pBufR = 0;
+	sum += x[pBufR] * *(bSeqPtr);
 	// increment buffer ptr, wrapping around if 0
 	if (++pBuf == M) pBuf = 0;
 	// then store current sample in incremented position in buffer
@@ -197,9 +226,10 @@ void ISR_AIC(void)
 	// get new sample
 	dInput = (double) mono_read_16Bit();
 	// convolve and shift buffer
-	//dOutput = convolution(sInput, x);
-	//shift_buffer(sInput, x);
-	dOutput = circular_buffer(dInput, x);
+	//dOutput = convolution(dInput, x);
+	//shift_buffer(dInput, x);
+	// dOutput = circular_buffer(dInput, x);
+	dOutput = circular_buffer_symm(dInput, x);
 	// output result to both L/R channels
 	mono_write_16Bit( (short) dOutput );
 }

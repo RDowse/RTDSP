@@ -43,7 +43,7 @@
 </editor>
 </editors>
 <views>
-<view id="com.ti.ccstudio.debug.registers.ui.Expressions" partName="Watch (1)">
+<view id="com.ti.ccstudio.debug.registers.ui.Expressions" partName="Watch (2)">
 <viewState StatesFile="H:/RTDSPlab/lab4/.metadata/.plugins/com.ti.ccstudio.debug.registers.ui/expressions.xml" columnName.0="Name" columnName.1="Value" columnName.2="Address" columnName.3="Type" columnName.4="Format" columnWidth.0="150" columnWidth.1="150" columnWidth.2="150" columnWidth.3="150" columnWidth.4="80" numberOfVisibleColumns="5"/>
 </view>
 <view id="org.eclipse.ui.cheatsheets.views.CheatSheetView" partName="Cheat Sheets">
@@ -62,9 +62,7 @@
 <expanded>
 <element path="H:\RTDSPlab\lab4\RTDSP"/>
 </expanded>
-<selection>
-<element path="H:/RTDSPlab/lab4/RTDSP"/>
-</selection>
+<selection/>
 <customFilters userDefinedPatternsEnabled="false">
 <xmlDefinedFilters>
 <child filterId="org.eclipse.cdt.internal.ui.CView.ArchiveFilter" isEnabled="false"/>
@@ -93,11 +91,11 @@
 <view id="com.ti.ccstudio.debug.registers.ui.Variables" partName="Local (1)">
 <viewState columnName.0="Name" columnName.1="Value" columnName.2="Address" columnName.3="Type" columnName.4="Format" columnWidth.0="150" columnWidth.1="150" columnWidth.2="150" columnWidth.3="150" columnWidth.4="80" numberOfVisibleColumns="5"/>
 </view>
-<view id="com.ti.ccstudio.debug.ui.TIDisassemblyView" partName="Disassembly">
+<view id="com.ti.ccstudio.debug.ui.TIDisassemblyView" partName="Disassembly (circular_buffer_symm + 0x3c)">
 <viewState/>
 </view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
-<viewState columnWidth0="522" columnWidth1="108" columnWidth2="183" columnWidth3="93" columnWidth4="0" horizontalPosition="0" verticalPosition="0">
+<viewState columnWidth0="525" columnWidth1="111" columnWidth2="186" columnWidth3="96" columnWidth4="0" horizontalPosition="0" verticalPosition="0">
 <columnOrder columnOrderIndex="0"/>
 <columnOrder columnOrderIndex="1"/>
 <columnOrder columnOrderIndex="2"/>
@@ -261,7 +259,6 @@
 <new_wizard_action id="com.ti.ccstudio.system.setup.editor.wizards.SystemSetupNewWizard"/>
 <new_wizard_action id="org.eclipse.rtsc.xdctools.buildDefinitions.DSPBIOS_5_31.tools.DSPBIOSCreateNew"/>
 <perspective_action id="org.eclipse.cdt.ui.CPerspective"/>
-<view id="org.eclipse.debug.ui.DebugView"/>
 <view id="com.ti.ccstudio.debug.registers.ui.Variables"/>
 <view id="com.ti.ccstudio.debug.registers.ui.Expressions"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
@@ -269,22 +266,25 @@
 <view id="com.ti.dvt.ui.views.line:SingleTime"/>
 <view id="com.ti.ccstudio.debug.ui.TIDisassemblyView"/>
 <view id="org.eclipse.ui.cheatsheets.views.CheatSheetView"/>
+<view id="org.eclipse.debug.ui.DebugView"/>
 <fastViews>
 <view id="org.eclipse.cdt.ui.CView" ratio="0.3"/>
 <view id="com.ti.ccstudio.system.setup.ui.views.TargetConfigurationView" ratio="0.3"/>
 </fastViews>
 <layout>
 <mainWindow>
-<info folder="true" part="org.eclipse.debug.internal.ui.NavigatorFolderView">
-<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">
-<page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
-<page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
+<info folder="true" part="org.eclipse.debug.internal.ui.ToolsFolderView">
+<folder activePageID="com.ti.ccstudio.debug.registers.ui.Variables" appearance="2" expanded="2">
+<page content="com.ti.ccstudio.debug.registers.ui.Variables" label="Local (1)"/>
+<page content="com.ti.ccstudio.debug.registers.ui.Registers" label="LabelNotFound"/>
+<page content="com.ti.ccstudio.debug.registers.ui.Expressions" label="Watch (2)"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
+<part id="1"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@1f734fa" ratio="0.7497382" ratioLeft="1432" ratioRight="478" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@1f734fa" ratio="0.7497382" ratioLeft="1432" ratioRight="478" relationship="2" relative="org.eclipse.debug.internal.ui.ToolsFolderView">
 <folder activePageID="org.eclipse.ui.cheatsheets.views.CheatSheetView" appearance="2" expanded="2">
 <page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
@@ -294,7 +294,8 @@
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@b70e32" ratio="0.7497349" ratioLeft="707" ratioRight="236" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
+<info part="org.eclipse.ui.views.ResourceNavigator" ratio="0.5" ratioLeft="239" ratioRight="239" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1f734fa"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@b70e32" ratio="0.7497349" ratioLeft="707" ratioRight="236" relationship="4" relative="org.eclipse.debug.internal.ui.ToolsFolderView">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
@@ -313,26 +314,15 @@
 </presentation>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.25249642" ratioLeft="177" ratioRight="524" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView"/>
+<info part="org.eclipse.ui.editorss" ratio="0.25249642" ratioLeft="177" ratioRight="524" relationship="4" relative="org.eclipse.debug.internal.ui.ToolsFolderView"/>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@1516432" ratio="0.7497382" ratioLeft="1432" ratioRight="478" relationship="2" relative="org.eclipse.ui.editorss">
 <folder activePageID="com.ti.ccstudio.debug.ui.TIDisassemblyView" appearance="2" expanded="2">
-<page content="com.ti.ccstudio.debug.ui.TIDisassemblyView" label="Disassembly"/>
+<page content="com.ti.ccstudio.debug.ui.TIDisassemblyView" label="Disassembly (circular_buffer_symm + 0x3c)"/>
 <page content="com.ti.ccstudio.memory.ui.view.TIMemoryView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
 <page content="com.ti.ccstudio.debug.ui.views.KernelObjects" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
-</presentation>
-</folder>
-</info>
-<info folder="true" part="org.eclipse.debug.internal.ui.ToolsFolderView" ratio="0.5" ratioLeft="955" ratioRight="955" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
-<folder activePageID="com.ti.ccstudio.debug.registers.ui.Expressions" appearance="2" expanded="2">
-<page content="com.ti.ccstudio.debug.registers.ui.Variables" label="Local (1)"/>
-<page content="com.ti.ccstudio.debug.registers.ui.Expressions" label="Watch (1)"/>
-<page content="com.ti.ccstudio.debug.registers.ui.Registers" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-<part id="1"/>
 </presentation>
 </folder>
 </info>
@@ -342,6 +332,14 @@
 </folder>
 </info>
 </mainWindow>
+<detachedWindow height="250" width="707" x="1200" y="753">
+<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">
+<page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
+</folder>
+</detachedWindow>
 </layout>
 </perspective>
 </perspectives>
@@ -349,91 +347,8 @@
 <navigationHistory>
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/RTDSP/intio.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/RTDSP/fir_coeff.txt"/>
 </editors>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="3911" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="3997" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4380" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4618" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4285" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="3911" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4050" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4584" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="4311" y="0"/>
-</item>
 <item historyLabel="intio.c" index="0">
 <position info="not_deleted" x="4584" y="0"/>
 </item>
@@ -497,8 +412,92 @@
 <item historyLabel="intio.c" index="0">
 <position info="not_deleted" x="4311" y="0"/>
 </item>
-<item active="true" historyLabel="intio.c" index="0">
+<item historyLabel="intio.c" index="0">
 <position info="not_deleted" x="4584" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="4093" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="4290" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="1379" y="0"/>
+</item>
+<item historyLabel="fir_coeff.txt" index="1">
+<position/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="1379" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="8356" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="4093" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="4298" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="6784" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="7747" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="7748" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="6784" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="7747" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="6784" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="7747" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="6784" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="7747" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="7342" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="4093" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="6784" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="7747" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="6784" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="7747" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="6784" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="7747" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="6784" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="7747" y="0"/>
+</item>
+<item active="true" historyLabel="intio.c" index="0">
+<position info="not_deleted" x="6784" y="0"/>
 </item>
 </navigationHistory>
 <stickyState>
@@ -525,6 +524,9 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="fir_coeff.txt" tooltip="RTDSP/fir_coeff.txt">
+<persistable path="/RTDSP/fir_coeff.txt"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.ti.ccstudio.bios.dsp.editor" name="dsp_bios_.tcf" tooltip="RTDSP/dsp_bios_.tcf">
 <persistable path="/RTDSP/dsp_bios_.tcf"/>
 </file>
