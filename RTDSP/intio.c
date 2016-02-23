@@ -77,6 +77,14 @@ DSK6713_AIC23_CodecHandle H_Codec;
 
 // creates boolean type
 typedef enum { false, true } bool;
+
+// enum for buffer types. Change the value of select_buffer to pick the type used.
+typedef enum {
+	noncircular_filter, circular_filter, modulo_circular_filter,
+	symmetrical_circular_filter
+} BufferType;
+BufferType select_buffer = modulo_circular_filter;
+ 
 // Current x[i] and y[i]
 double dInput;
 double dOutput;
@@ -84,8 +92,9 @@ double dOutput;
 double x[BUFFER_SIZE] = {0};
 // ptr to most recent element in buffer
 short pBuf = 0;
+
 //circular 1 or shift buffer 0
-short selectFIR = 2;
+//short selectFIR = 2;
 
  /******************************* Function prototypes ********************************/
 void   init_hardware(void);     
@@ -251,17 +260,17 @@ void ISR_AIC(void)
 	// get new sample
 	dInput = (double) mono_read_16Bit();
 	// filtering using method selected by selectFIR
-	switch (selectFIR) {
-		case 0:
+	switch (select_buffer) {
+		case noncircular_filter:
 			dOutput = noncircular_filter(dInput);
 			break;
-		case 1:
+		case modulo_circular_filter:
 			dOutput = circular_filter_modulo(dInput);
 			break;
-		case 2:
+		case circular_filter:
 			dOutput = circular_filter(dInput);
 			break;
-		case 3:
+		case symmetrical_circular_filter:
 			dOutput = circular_filter_symm(dInput);
 			break;
 	}
