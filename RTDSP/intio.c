@@ -44,8 +44,8 @@
 // PI defined here for use in your code 
 #define PI 3.141592653589793
 
-// define a delay buffer of size M (order of filter)
-#define M 206
+// define a delay buffer of size BUFFER_SIZE (order of filter)
+#define BUFFER_SIZE 206
 
 //sampling frequency as defind in Config
 #define SAMP_FREQ 8000
@@ -81,7 +81,7 @@ typedef enum { false, true } bool;
 double dInput;
 double dOutput;
 // signal buffer of size M 
-double x[M] = {0};
+double x[BUFFER_SIZE] = {0};
 // ptr to most recent element in buffer
 short pBuf = 0;
 //circular 1 or shift buffer 0
@@ -156,9 +156,9 @@ double noncircular_filter(double sample_in){
 	double sum = 0;
 	// Perform convolution
 	sum += sample_in * b[0]; // convolution with coefficient 0
-	for (i=0; i<M; i++)
+	for (i=0; i<BUFFER_SIZE; i++)
 	{
-		sum += b[M-i] * x[i]; // convolution with coefficients 1 to M
+		sum += b[BUFFER_SIZE-i] * x[i]; // convolution with coefficients 1 to M
 	}
 	// Perform buffer shift (delay)
 	shift_buffer(sample_in);
@@ -169,7 +169,7 @@ void shift_buffer(double sample_in)
 {
 	short i;
 	// shifts buffer x[]
-	for (i=M-1; i>0; i--)
+	for (i=BUFFER_SIZE-1; i>0; i--)
 	{
 		x[i]=x[i-1]; /* move data along buffer from lower */
 	} /* element to next higher */
@@ -181,15 +181,15 @@ double circular_filter_modulo(double sample_in){
 	double sum = 0;
 	// do convolution sequentially from coefficient b0 to bM
 	sum += b[0] * sample_in ; // convolution with coefficient 0
-	for (i=0; i<M; i++)
+	for (i=0; i<BUFFER_SIZE; i++)
 	{
 		// convolution with coefficients 1 to M
-		sum += b[i+1] * x[ (M+pBuf-i)%M ];
+		sum += b[i+1] * x[ (BUFFER_SIZE+pBuf-i)%M ];
 	}
 	// then store current sample in incremented position in buffer,
 	// wrapping around if attempting to go past last entry in buffer
 	++pBuf;
-	pBuf = pBuf % M;
+	pBuf = pBuf % BUFFER_SIZE;
 	x[pBuf] = sample_in;
 	return sum;
 }
@@ -204,12 +204,12 @@ double circular_filter(double sample_in){
 	{
 		sum += *(pCoeff++) * x[i]; // convolution with left part of buffer
 	}
-	for (i=M-1; i>pBuf; i--)
+	for (i=BUFFER_SIZE-1; i>pBuf; i--)
 	{
 		sum += *(pCoeff++) * x[i]; // convolution with right part of buffer
 	}
 	// increment buffer ptr, wrapping around if 0
-	if (++pBuf == M) pBuf = 0;
+	if (++pBuf == BUFFER_SIZE) pBuf = 0;
 	// then store current sample in incremented position in buffer
 	x[pBuf] = sample_in;
 	return sum;
@@ -219,26 +219,26 @@ double circular_filter_symm(double sample_in){
 	short i;
 	double sum = 0;
 	double *pCoeff = b;
-	short pBufR = pBuf + 1; // initially points to x[M-1], runs to x[M/2]
-	short pBufL = pBuf; // initially points to x[1], runs to x[M/2] 
+	short pBufR = pBuf + 1; // initially points to x[M-1], runs to x[BUFFER_SIZE/2]
+	short pBufL = pBuf; // initially points to x[1], runs to x[BUFFER_SIZE/2] 
 	// do convolution in pairs, leveraging on symmetry of b[] coefficients
-	if (pBufR == M) pBufR = 0; // wraparound
+	if (pBufR == BUFFER_SIZE) pBufR = 0; // wraparound
 	sum += *(pCoeff++) * (sample_in + x[pBufR++]); // convolution with coefficient 0 and M-1
-	for (i=1; i<M/2; i++)
+	for (i=1; i<BUFFER_SIZE/2; i++)
 	{
 		// deal with wraparound of pBufL and pBufR
-		if (pBufR == M) pBufR = 0;
-		if (pBufL == -1) pBufL = M-1;
-		// convolve with coefficients i and M-1-i
+		if (pBufR == BUFFER_SIZE) pBufR = 0;
+		if (pBufL == -1) pBufL = BUFFER_SIZE-1;
+		// convolve with coefficients i and BUFFER_SIZE-1-i
 		// also increment buffer pointers
 		// (decrement pBufL because it moves leftwards through buffer)
 		sum += *(pCoeff++) * (x[pBufL--] + x[pBufR++]);
 	}
-	// special case for coefficient M/2
-	if (pBufR == M) pBufR = 0;
+	// special case for coefficient BUFFER_SIZE/2
+	if (pBufR == BUFFER_SIZE) pBufR = 0;
 	sum += *(pCoeff) * x[pBufR];
 	// increment buffer ptr, wrapping around if 0
-	if (++pBuf == M) pBuf = 0;
+	if (++pBuf == BUFFER_SIZE) pBuf = 0;
 	// then store current sample in incremented position in buffer
 	x[pBuf] = sample_in;
 	return sum;
