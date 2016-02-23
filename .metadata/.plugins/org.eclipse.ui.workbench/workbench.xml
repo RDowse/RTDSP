@@ -22,6 +22,7 @@
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="190" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.cdt.ui.editor.asm.AsmEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.cdt.ui.editor.CEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
@@ -34,12 +35,16 @@
 <folder appearance="1" expanded="2">
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
+<part id="1"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
 <editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="intio.c" partName="intio.c" path="H:/RTDSPlab/lab4/RTDSP/intio.c" title="intio.c" tooltip="RTDSP/intio.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/RTDSP/intio.c"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.asm.AsmEditor" name="dsp_bios_cfg.s62" partName="dsp_bios_cfg.s62" path="H:/RTDSPlab/lab4/RTDSP/Debug/dsp_bios_cfg.s62" title="dsp_bios_cfg.s62" tooltip="RTDSP/Debug/dsp_bios_cfg.s62" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/RTDSP/Debug/dsp_bios_cfg.s62"/>
 </editor>
 </editors>
 <views>
@@ -90,7 +95,7 @@
 <view id="com.ti.ccstudio.debug.registers.ui.Variables" partName="Local (1)">
 <viewState columnName.0="Name" columnName.1="Value" columnName.2="Address" columnName.3="Type" columnName.4="Format" columnWidth.0="150" columnWidth.1="150" columnWidth.2="150" columnWidth.3="150" columnWidth.4="80" numberOfVisibleColumns="5"/>
 </view>
-<view id="com.ti.ccstudio.debug.ui.TIDisassemblyView" partName="Disassembly (main)">
+<view id="com.ti.ccstudio.debug.ui.TIDisassemblyView" partName="Disassembly">
 <viewState/>
 </view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
@@ -316,7 +321,7 @@
 <info part="org.eclipse.ui.editorss" ratio="0.25249642" ratioLeft="177" ratioRight="524" relationship="4" relative="org.eclipse.debug.internal.ui.ToolsFolderView"/>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@1516432" ratio="0.7497382" ratioLeft="1432" ratioRight="478" relationship="2" relative="org.eclipse.ui.editorss">
 <folder activePageID="com.ti.ccstudio.debug.ui.TIDisassemblyView" appearance="2" expanded="2">
-<page content="com.ti.ccstudio.debug.ui.TIDisassemblyView" label="Disassembly (main)"/>
+<page content="com.ti.ccstudio.debug.ui.TIDisassemblyView" label="Disassembly"/>
 <page content="com.ti.ccstudio.memory.ui.view.TIMemoryView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
 <page content="com.ti.ccstudio.debug.ui.views.KernelObjects" label="LabelNotFound"/>
@@ -346,64 +351,8 @@
 <navigationHistory>
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/RTDSP/intio.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.asm.AsmEditor" path="/RTDSP/Debug/dsp_bios_cfg.s62"/>
 </editors>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="9103" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="9142" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="8688" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="8777" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="9004" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="8980" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="9103" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="9142" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="8688" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="8777" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="8943" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="9103" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="9142" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="8688" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="8777" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="8811" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="9103" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="9142" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="8688" y="0"/>
-</item>
 <item historyLabel="intio.c" index="0">
 <position info="not_deleted" x="8777" y="0"/>
 </item>
@@ -494,6 +443,63 @@
 <item historyLabel="intio.c" index="0">
 <position info="not_deleted" x="4133" y="0"/>
 </item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="4199" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="8315" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="4199" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="8792" y="0"/>
+</item>
+<item historyLabel="dsp_bios_cfg.s62" index="1">
+<position info="not_deleted" x="19313" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="4199" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="8977" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="4199" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="6774" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="6743" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="7041" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="4199" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="6743" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="7210" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="6954" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="4199" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="6779" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="6743" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="6694" y="0"/>
+</item>
 <item active="true" historyLabel="intio.c" index="0">
 <position info="not_deleted" x="4199" y="0"/>
 </item>
@@ -522,6 +528,9 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.asm.AsmEditor" name="dsp_bios_cfg.s62" tooltip="RTDSP/Debug/dsp_bios_cfg.s62">
+<persistable path="/RTDSP/Debug/dsp_bios_cfg.s62"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="fir_coeff.txt" tooltip="RTDSP/fir_coeff.txt">
 <persistable path="/RTDSP/fir_coeff.txt"/>
 </file>

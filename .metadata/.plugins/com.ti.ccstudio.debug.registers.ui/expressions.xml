@@ -7,5 +7,14 @@
 <Expression IMemento.internal.id="x">
 <Format/>
 </Expression>
+<Expression IMemento.internal.id="(pBuf-i)%206">
+<Format/>
+</Expression>
+<Expression IMemento.internal.id="pBuf">
+<Format/>
+</Expression>
+<Expression IMemento.internal.id="i">
+<Format/>
+</Expression>
 </Expressions>
 </States>

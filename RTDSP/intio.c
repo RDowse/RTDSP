@@ -80,10 +80,10 @@ typedef enum { false, true } bool;
 
 // enum for buffer types. Change the value of select_buffer to pick the type used.
 typedef enum {
-	noncircular_filter, circular_filter, modulo_circular_filter,
-	symmetrical_circular_filter
+	NONCIRCULAR_FILTER, CIRCULAR_FILTER, CIRCULAR_FILTER_MODULO,
+	CIRCULAR_FILTER_SYMM
 } BufferType;
-BufferType select_buffer = modulo_circular_filter;
+BufferType select_buffer = CIRCULAR_FILTER_MODULO;
  
 // Current x[i] and y[i]
 double dInput;
@@ -193,7 +193,7 @@ double circular_filter_modulo(double sample_in){
 	for (i=0; i<BUFFER_SIZE; i++)
 	{
 		// convolution with coefficients 1 to M
-		sum += b[i+1] * x[ (BUFFER_SIZE+pBuf-i)%M ];
+		sum += b[i+1] * x[ (BUFFER_SIZE+pBuf-i) % BUFFER_SIZE ];
 	}
 	// then store current sample in incremented position in buffer,
 	// wrapping around if attempting to go past last entry in buffer
@@ -261,16 +261,16 @@ void ISR_AIC(void)
 	dInput = (double) mono_read_16Bit();
 	// filtering using method selected by selectFIR
 	switch (select_buffer) {
-		case noncircular_filter:
+		case NONCIRCULAR_FILTER:
 			dOutput = noncircular_filter(dInput);
 			break;
-		case modulo_circular_filter:
+		case CIRCULAR_FILTER_MODULO:
 			dOutput = circular_filter_modulo(dInput);
 			break;
-		case circular_filter:
+		case CIRCULAR_FILTER:
 			dOutput = circular_filter(dInput);
 			break;
-		case symmetrical_circular_filter:
+		case CIRCULAR_FILTER_SYMM:
 			dOutput = circular_filter_symm(dInput);
 			break;
 	}
