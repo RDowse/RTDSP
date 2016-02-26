@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <States>
 <Expressions>
-<Expression IMemento.internal.id="selectFIR">
+<Expression IMemento.internal.id="select_buffer">
 <Format/>
 </Expression>
 <Expression IMemento.internal.id="x">

@@ -8,10 +8,11 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="bool"/>
+		<item key="selection" value=""/>
 		<item key="wrap" value="false"/>
 		<item key="casesensitive" value="false"/>
 		<list key="findhistory">
+			<item value="%"/>
 			<item value="bool"/>
 			<item value="BUFFER_"/>
 			<item value="BUFFER"/>
@@ -19,7 +20,6 @@
 			<item value="HEAD"/>
 			<item value="sine_init"/>
 			<item value="advance_sample"/>
-			<item value="float"/>
 		</list>
 		<list key="replacehistory">
 		</list>
