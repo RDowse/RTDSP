@@ -5,7 +5,7 @@
  				      EE 3.19: Real Time Digital Signal Processing
 					       Dr Paul Mitcheson and Daniel Harvey
 
-				        		  LAB 3: Interrupt I/O
+				        		  LAB 4: FIR Filter
 
  				            ********* I N T I O. C **********
 
@@ -15,10 +15,7 @@
  				Updated for use on 6713 DSK by Danny Harvey: May-Aug 2006
 				Updated for CCS V4 Sept 10
  ************************************************************************************/
-/*
- *	You should modify the code so that interrupts are used to service the 
- *  audio port.
- */
+ 
 /**************************** Pre-processor statements ******************************/
 
 #include <stdlib.h>
@@ -33,7 +30,7 @@
 #include "dsk6713_aic23.h"
 
 // MATLAB output coefficients
-#include "fir_coeff.txt" 
+#include "fir_coeff_2.txt" 
 
 // math library (trig functions)
 #include <math.h>
@@ -41,11 +38,8 @@
 // Some functions to help with writing/reading the audio ports when using interrupts.
 #include <helper_functions_ISR.h>
 
-// PI defined here for use in your code 
-#define PI 3.141592653589793
-
 // define a delay buffer of size BUFFER_SIZE (order of filter)
-#define BUFFER_SIZE 206
+#define BUFFER_SIZE 212
 
 //sampling frequency as defind in Config
 #define SAMP_FREQ 8000

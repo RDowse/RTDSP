@@ -71,7 +71,6 @@
 <expanded>
 <element path="H:\RTDSPlab\lab4\RTDSP"/>
 </expanded>
-<selection/>
 <customFilters userDefinedPatternsEnabled="false">
 <xmlDefinedFilters>
 <child filterId="org.eclipse.cdt.internal.ui.CView.ArchiveFilter" isEnabled="false"/>
@@ -100,7 +99,7 @@
 <view id="com.ti.ccstudio.debug.registers.ui.Variables" partName="Local (1)">
 <viewState columnName.0="Name" columnName.1="Value" columnName.2="Address" columnName.3="Type" columnName.4="Format" columnWidth.0="150" columnWidth.1="150" columnWidth.2="150" columnWidth.3="150" columnWidth.4="80" numberOfVisibleColumns="5"/>
 </view>
-<view id="com.ti.ccstudio.debug.ui.TIDisassemblyView" partName="Disassembly (C$RL18)">
+<view id="com.ti.ccstudio.debug.ui.TIDisassemblyView" partName="Disassembly (main)">
 <viewState/>
 </view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
@@ -326,7 +325,7 @@
 <info part="org.eclipse.ui.editorss" ratio="0.25249642" ratioLeft="177" ratioRight="524" relationship="4" relative="org.eclipse.debug.internal.ui.ToolsFolderView"/>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@1516432" ratio="0.7497382" ratioLeft="1432" ratioRight="478" relationship="2" relative="org.eclipse.ui.editorss">
 <folder activePageID="com.ti.ccstudio.debug.ui.TIDisassemblyView" appearance="2" expanded="2">
-<page content="com.ti.ccstudio.debug.ui.TIDisassemblyView" label="Disassembly (C$RL18)"/>
+<page content="com.ti.ccstudio.debug.ui.TIDisassemblyView" label="Disassembly (main)"/>
 <page content="com.ti.ccstudio.memory.ui.view.TIMemoryView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
 <page content="com.ti.ccstudio.debug.ui.views.KernelObjects" label="LabelNotFound"/>
