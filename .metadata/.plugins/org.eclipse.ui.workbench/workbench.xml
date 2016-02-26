@@ -41,7 +41,7 @@
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="intio.c" partName="intio.c" path="H:/RTDSPlab/lab4/RTDSP/intio.c" title="intio.c" tooltip="RTDSP/intio.c" workbook="DefaultEditorWorkbook">
+<editor focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="intio.c" partName="intio.c" path="H:/RTDSPlab/lab4/RTDSP/intio.c" title="intio.c" tooltip="RTDSP/intio.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/RTDSP/intio.c"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.asm.AsmEditor" name="dsp_bios_cfg.s62" partName="dsp_bios_cfg.s62" path="H:/RTDSPlab/lab4/RTDSP/Debug/dsp_bios_cfg.s62" title="dsp_bios_cfg.s62" tooltip="RTDSP/Debug/dsp_bios_cfg.s62" workbook="DefaultEditorWorkbook">
@@ -103,7 +103,7 @@
 <viewState/>
 </view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
-<viewState columnWidth0="531" columnWidth1="117" columnWidth2="192" columnWidth3="102" columnWidth4="0" horizontalPosition="0" verticalPosition="0">
+<viewState columnWidth0="534" columnWidth1="120" columnWidth2="195" columnWidth3="105" columnWidth4="0" horizontalPosition="0" verticalPosition="0">
 <columnOrder columnOrderIndex="0"/>
 <columnOrder columnOrderIndex="1"/>
 <columnOrder columnOrderIndex="2"/>
@@ -112,7 +112,7 @@
 </viewState>
 </view>
 </views>
-<perspectives activePart="org.eclipse.cdt.ui.editor.CEditor" activePerspective="org.eclipse.debug.ui.DebugPerspective">
+<perspectives activePart="org.eclipse.ui.console.ConsoleView" activePerspective="org.eclipse.debug.ui.DebugPerspective">
 <perspective editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.cdt.internal.ui.CPerspectiveFactory" id="org.eclipse.cdt.ui.CPerspective" label="C/C++"/>
 <alwaysOnActionSet id="com.ti.ccstudio.debug.ui.licensing"/>
@@ -359,24 +359,6 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/RTDSP/fir_coeff.txt"/>
 </editors>
 <item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="7986" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="7506" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="7983" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="8175" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="7506" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
-<position info="not_deleted" x="7842" y="0"/>
-</item>
-<item historyLabel="intio.c" index="0">
 <position info="not_deleted" x="7983" y="0"/>
 </item>
 <item historyLabel="intio.c" index="0">
@@ -505,8 +487,26 @@
 <item historyLabel="intio.c" index="0">
 <position info="not_deleted" x="4491" y="0"/>
 </item>
-<item active="true" historyLabel="intio.c" index="0">
+<item historyLabel="intio.c" index="0">
 <position info="not_deleted" x="9805" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="1387" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="4493" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="1644" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="4705" y="0"/>
+</item>
+<item historyLabel="intio.c" index="0">
+<position info="not_deleted" x="4912" y="0"/>
+</item>
+<item active="true" historyLabel="intio.c" index="0">
+<position info="not_deleted" x="4318" y="0"/>
 </item>
 </navigationHistory>
 <stickyState>
