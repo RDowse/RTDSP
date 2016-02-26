@@ -7,7 +7,7 @@ Fpass1 = 450;              % First Passband Frequency
 Fpass2 = 1600;             % Second Passband Frequency
 Fstop2 = 1750;             % Second Stopband Frequency
 A = [0 1 0];               % Desire amplitude
-dens   = 20;               % Density Factor
+dens = 20;               % Density Factor
 
 rp = 0.4;                  % Stopband ripple
 sa = -48;                  % Minimum stopband attenuation
@@ -43,7 +43,5 @@ line('XData', [0 1], 'YData', [-48 -48], 'LineStyle', '-.',...
     'LineWidth',0.1,'Color',[1 0 1]);
 
 save filename.txt b -ASCII -DOUBLE -TABS
-
-
 
 % [EOF]

@@ -192,7 +192,7 @@ double circular_filter_modulo(double sample_in){
 	sum += b[0] * sample_in ; // convolution with coefficient 0
 	for (i=0; i<BUFFER_SIZE; i++)
 	{
-		// convolution with coefficients 1 to M
+		// convolution with coefficients 1 to BUFFER_SIZE
 		sum += b[i+1] * x[ (BUFFER_SIZE+pBuf-i) % BUFFER_SIZE ];
 	}
 	// then store current sample in incremented position in buffer,
