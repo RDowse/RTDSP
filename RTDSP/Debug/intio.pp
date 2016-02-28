@@ -4,7 +4,7 @@ intio.obj: C:/EEE/CCStudio4.1/ccsv4/tools/compiler/c6000/include/stdlib.h
 intio.obj: C:/EEE/CCStudio4.1/ccsv4/tools/compiler/c6000/include/linkage.h
 intio.obj: C:/EEE/CCStudio4.1/ccsv4/tools/compiler/c6000/include/stdio.h
 intio.obj: C:/EEE/CCStudio4.1/ccsv4/tools/compiler/c6000/include/stdarg.h
-intio.obj: H:/RTDSPlab/lab4/RTDSP/Debug/dsp_bios_cfg.h
+intio.obj: H:/RTDSPlab/lab52/RTDSP/Debug/dsp_bios_cfg.h
 intio.obj: C:/EEE/CCStudio4.1/bios_5_41_02_14/packages/ti/bios/include/std.h
 intio.obj: C:/EEE/CCStudio4.1/bios_5_41_02_14/packages/ti/bios/include/tistdtypes.h
 intio.obj: C:/EEE/CCStudio4.1/bios_5_41_02_14/packages/ti/bios/include/hst.h
@@ -51,7 +51,7 @@ intio.obj: C:/EEE/CCStudio4.1/ccsv4/C6000/csl/include/csl_timerhal.h
 intio.obj: C:/EEE/CCStudio4.1/ccsv4/C6000/dsk6713/include/dsk6713_aic23.h
 intio.obj: C:/EEE/CCStudio4.1/ccsv4/C6000/csl/include/csl_mcbsp.h
 intio.obj: C:/EEE/CCStudio4.1/ccsv4/C6000/csl/include/csl_mcbsphal.h
-intio.obj: ../fir_coeff_2.txt
+intio.obj: ../iir_coeff_2.txt
 intio.obj: C:/EEE/CCStudio4.1/ccsv4/tools/compiler/c6000/include/math.h
 intio.obj: C:/EEE/CCStudio4.1/ccsv4/tools/compiler/c6000/include/float.h
 intio.obj: C:/EEE/CCStudio4.1/ccsv4/tools/compiler/c6000/include/access.h

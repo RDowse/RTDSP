@@ -28,7 +28,7 @@
 #include "dsk6713_aic23.h"
 
 // MATLAB output coefficients
-#include "iir_coeff.txt" 
+#include "iir_coeff_2.txt" 
 
 // math library (trig functions)
 #include <math.h>
@@ -71,13 +71,14 @@ typedef enum { false, true } bool;
 short order;
 double* x;
 double* y;
+int filter = 1;
 
  /******************************* Function prototypes ********************************/
 void   init_hardware(void);     
 void   init_HWI(void);
 void   ISR_AIC(void);  
 double iir_filter(double input);
-void shift_buffer(double sample, double buffer);
+void shift_buffer(double sample, double* buffer);
 /********************************** Main routine ************************************/
 void main()
 {
@@ -137,29 +138,42 @@ void init_HWI(void)
 
 /*************************** Signal processing functions ******************************/  
 
-double iir_filter(double input) {
-	
+double small_iir_filter(double input)
+{
+	*(x+1) = *(x);
+	*(x) = input;
+	*(y+1) = *(y);
+	*(y) =    b[0] * *(x)
+			+ b[1] * *(x+1)
+			- a[1] * *(y+1);
+	return *(y);
+}
+
+double iir_filter(double input)
+{	
 	double sum = 0;
-	int size = sizeof(a);
+	int size = order+1;
 	int i;
-	for(i = 0; i < size; i++){
-		sum += b[i]*x[size-i]-a[i]*y[size-i]
-	}
 	shift_buffer(input, x);
 	shift_buffer(sum, y);
+	sum += b[0]* *(x);
+	for(i = 1; i < size; i++){
+		sum += b[i] * *(x+i) - a[i] * *(y+i);
+	}
+	*(y) = sum; 
 	return sum;
 }
 
-void shift_buffer(double sample, double buffer)
+void shift_buffer(double sample, double* buffer)
 {
 	short i;
-	int size = sizeof(buffer);
+	int size = order+1;
 	// shifts buffer
-	for (i=BUFFER_SIZE-1; i>0; i--)
+	for (i=size-1; i>0; i--)
 	{
-		buffer[i]=buffer[i-1]; /* move data along buffer from lower */
+		*(buffer+i)=*(buffer+i-1); /* move data along buffer from lower */
 	} /* element to next higher */
-	buffer[0] = sample; 
+	*(buffer) = sample; 
 }
 
 /******************** INTERRUPT SERVICE ROUTINE ***********************/  
@@ -167,9 +181,13 @@ void shift_buffer(double sample, double buffer)
 void ISR_AIC(void)
 {
 	// get new sample
-	dInput = (double) mono_read_16Bit();
+	double dOutput;
+	double dInput = (double) mono_read_16Bit();
 	// filtering using IIR
-	short dOutput = iir_filter(dInput);
+	if (filter == 1)
+		dOutput = iir_filter(dInput);
+	else dOutput = dInput;
+	//dOutput = iir_filter(dInput);
 	// output result to both L/R channels
 	mono_write_16Bit( (short) dOutput );
 }
