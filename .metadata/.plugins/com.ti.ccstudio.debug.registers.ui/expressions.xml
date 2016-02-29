@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <States>
 <Expressions>
-<Expression IMemento.internal.id="dOutput">
+<Expression IMemento.internal.id="filter">
 <Format/>
 </Expression>
 <Expression IMemento.internal.id="sample">

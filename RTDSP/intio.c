@@ -70,15 +70,15 @@ typedef enum { false, true } bool;
 // filter order and dynamic buffers
 short order;
 double* x;
-double* y;
 int filter = 1;
 
  /******************************* Function prototypes ********************************/
 void   init_hardware(void);     
 void   init_HWI(void);
 void   ISR_AIC(void);  
+void   init_buffer(void);
 double iir_filter(double input);
-void shift_buffer(double sample, double* buffer);
+void   shift_buffer(double sample, double* buffer);
 /********************************** Main routine ************************************/
 void main()
 {
@@ -89,10 +89,10 @@ void main()
 	/* initialize hardware interrupts */
 	init_HWI();
 	
-	/* initialise x/y buffers */
+	/* initialise buffer x */
 	order = sizeof(a)/sizeof(a[0])-1; /* Find the order of the filter. */
-	x = (double *)calloc(order+1, sizeof(double)); 
-	y = (double *)calloc(order+1, sizeof(double)); 
+	x = (double *)calloc(order, sizeof(double)); 
+	init_buffer();
   	 		
 	/* loop indefinitely, waiting for interrupts */  					
 	while(1) 
@@ -138,7 +138,7 @@ void init_HWI(void)
 
 /*************************** Signal processing functions ******************************/  
 
-double small_iir_filter(double input)
+/*double small_iir_filter(double input)
 {
 	*(x+1) = *(x);
 	*(x) = input;
@@ -147,11 +147,31 @@ double small_iir_filter(double input)
 			+ b[1] * *(x+1)
 			- a[1] * *(y+1);
 	return *(y);
+}*/
+
+void init_buffer(void)
+{
+	// zeroes buffer x[]
+	int i;
+	for (i=0; i<order; i++)
+		*(x+i) = 0;
 }
 
 double iir_filter(double input)
 {	
-	double sum = 0;
+	double sum = input;
+	double res = 0;
+	int i;
+	for (i=0; i<order; i++)
+	{
+		sum -= a[i+1] * *(x+i);
+		res += b[i+1] * *(x+i);
+	}
+	res += b[0] * sum;
+	shift_buffer(sum, x);
+	return res;
+	// BELOW IS OLD DOUBLE BUFFER CODE
+	/*double sum = 0;
 	int size = order+1;
 	int i;
 	shift_buffer(input, x);
@@ -161,15 +181,14 @@ double iir_filter(double input)
 		sum += b[i] * *(x+i) - a[i] * *(y+i);
 	}
 	*(y) = sum; 
-	return sum;
+	return sum;*/
 }
 
 void shift_buffer(double sample, double* buffer)
 {
 	short i;
-	int size = order+1;
 	// shifts buffer
-	for (i=size-1; i>0; i--)
+	for (i=order-1; i>0; i--)
 	{
 		*(buffer+i)=*(buffer+i-1); /* move data along buffer from lower */
 	} /* element to next higher */
