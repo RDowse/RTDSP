@@ -69,7 +69,7 @@ typedef enum { false, true } bool;
 
 // filter order and dynamic buffers
 short order;
-double* x;
+double* y;
 int filter = 1;
 
  /******************************* Function prototypes ********************************/
@@ -93,6 +93,7 @@ void main()
 	/* initialise buffer x */
 	order = sizeof(a)/sizeof(a[0])-1; /* Find the order of the filter. */
 	x = (double *)calloc(order, sizeof(double)); 
+	y = (double *)calloc(order, sizeof(double)); 
 	init_buffer();
   	 		
 	/* loop indefinitely, waiting for interrupts */  					
@@ -176,9 +177,9 @@ double iir_filter(double input)
 double iir_filter_transposed(double input){
 	double res = 0;
 	int i;
-	for (i=1; i<order; i++)
+	for (i=0; i<order; i++)
 	{
-		res += b[i] * *(x+i) - a[i] * *(y+i);
+		res += b[i+1] * *(x+i) - a[i+1] * *(y+i);
 	}
 	res += b[0] * *(x);
 	shift_buffer(res, y);
