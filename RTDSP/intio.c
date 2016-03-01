@@ -78,6 +78,7 @@ void   init_HWI(void);
 void   ISR_AIC(void);  
 void   init_buffer(void);
 double iir_filter(double input);
+double iir_filter_transposed(double input);
 void   shift_buffer(double sample, double* buffer);
 /********************************** Main routine ************************************/
 void main()
@@ -170,18 +171,19 @@ double iir_filter(double input)
 	res += b[0] * sum;
 	shift_buffer(sum, x);
 	return res;
-	// BELOW IS OLD DOUBLE BUFFER CODE
-	/*double sum = 0;
-	int size = order+1;
+}
+
+double iir_filter_transposed(double input){
+	double res = 0;
 	int i;
-	shift_buffer(input, x);
-	shift_buffer(sum, y);
-	sum += b[0]* *(x);
-	for(i = 1; i < size; i++){
-		sum += b[i] * *(x+i) - a[i] * *(y+i);
+	for (i=1; i<order; i++)
+	{
+		res += b[i] * *(x+i) - a[i] * *(y+i);
 	}
-	*(y) = sum; 
-	return sum;*/
+	res += b[0] * *(x);
+	shift_buffer(res, y);
+	shift_buffer(input, x);
+	return res;
 }
 
 void shift_buffer(double sample, double* buffer)
@@ -205,6 +207,8 @@ void ISR_AIC(void)
 	// filtering using IIR
 	if (filter == 1)
 		dOutput = iir_filter(dInput);
+	else if(filter == 2)
+		dOutput == iir_filter_transposed(dInput);
 	else dOutput = dInput;
 	//dOutput = iir_filter(dInput);
 	// output result to both L/R channels
