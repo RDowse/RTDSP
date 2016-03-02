@@ -176,13 +176,15 @@ double iir_filter(double input)
 }
 
 double iir_filter_transposed(double input){
+	//Calculate output using the stored buffer value.
 	double res = b[0]* input + *(buff+1);
 	int i;
-	for (i=0; i<order-1; i++)
+	for (i=1; i<order-1; i++)
 	{
-		*(buff+i) = b[i+1] * input - a[i+1] * res + *(buff+i+1);
+		*(buff+i) = b[i] * input - a[i] * res + *(buff+i+1);
 	}
-	*(buff+order-1) = b[order-1]*input - a[order-1]*res;
+	//Last coefficient of a and b added with no previous buffer value added.
+	*(buff+order-1) = b[order-1]*input - a[order-1]*res; 
 	return res;
 }
 
