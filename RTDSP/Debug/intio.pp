@@ -51,7 +51,7 @@ intio.obj: C:/EEE/CCStudio4.1/ccsv4/C6000/csl/include/csl_timerhal.h
 intio.obj: C:/EEE/CCStudio4.1/ccsv4/C6000/dsk6713/include/dsk6713_aic23.h
 intio.obj: C:/EEE/CCStudio4.1/ccsv4/C6000/csl/include/csl_mcbsp.h
 intio.obj: C:/EEE/CCStudio4.1/ccsv4/C6000/csl/include/csl_mcbsphal.h
-intio.obj: ../iir_coeff.txt
+intio.obj: ../iir_coeff_2.txt
 intio.obj: C:/EEE/CCStudio4.1/ccsv4/tools/compiler/c6000/include/math.h
 intio.obj: C:/EEE/CCStudio4.1/ccsv4/tools/compiler/c6000/include/float.h
 intio.obj: C:/EEE/CCStudio4.1/ccsv4/tools/compiler/c6000/include/access.h

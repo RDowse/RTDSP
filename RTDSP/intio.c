@@ -28,7 +28,7 @@
 #include "dsk6713_aic23.h"
 
 // MATLAB output coefficients
-#include "iir_coeff.txt" 
+#include "iir_coeff_2.txt" 
 
 // math library (trig functions)
 #include <math.h>
@@ -70,8 +70,8 @@ typedef enum { false, true } bool;
 // filter order and dynamic buffers
 short order;
 double* x;
-double *y;
-int filter = 1;
+double* buff;
+int filter = 2;
 
  /******************************* Function prototypes ********************************/
 void   init_hardware(void);     
@@ -79,8 +79,8 @@ void   init_HWI(void);
 void   ISR_AIC(void);  
 void   init_buffer(void);
 double iir_filter(double input);
+double iir_filter_transposed(double input);
 void   shift_buffer(double sample, double* buffer);
-double small_iir_filter(double input);
 /********************************** Main routine ************************************/
 void main()
 {
@@ -92,10 +92,9 @@ void main()
 	init_HWI();
 	
 	/* initialise buffer x */
-	order = 2;
-	//order = sizeof(a)/sizeof(a[0])-1; /* Find the order of the filter. */
-	x = (double *)calloc(order, sizeof(double)); 
-	y = (double *)calloc(order, sizeof(double)); 
+	order = sizeof(a)/sizeof(a[0])-1; /* Find the order of the filter. */
+	x = (double *)calloc(order, sizeof(double));
+	buff = (double *)calloc(order, sizeof(double));
 	init_buffer();
   	 		
 	/* loop indefinitely, waiting for interrupts */  					
@@ -142,24 +141,13 @@ void init_HWI(void)
 
 /*************************** Signal processing functions ******************************/  
 
-double small_iir_filter(double input)
-{
-	*(x+1) = *(x);
-	*(x) = input;
-	*(y+1) = *(y);
-	*(y) =    b[0] * *(x)
-			+ b[1] * *(x+1)
-			- a[1] * *(y+1);
-	return *(y);
-}
-
 void init_buffer(void)
 {
 	// zeroes buffer x[]
 	int i;
 	for (i=0; i<order; i++) {
 		*(x+i) = 0;
-		*(y+i) = 0;
+		*(buff+i) = 0;
 	}
 }
 
@@ -176,18 +164,19 @@ double iir_filter(double input)
 	res += b[0] * sum;
 	shift_buffer(sum, x);
 	return res;
-	// BELOW IS OLD DOUBLE BUFFER CODE
-	/*double sum = 0;
-	int size = order+1;
+}
+
+double iir_filter_transposed(double input){
+	//Calculate output using the stored buffer value.
+	double res = b[0]* input + *(buff);
 	int i;
-	shift_buffer(input, x);
-	shift_buffer(sum, y);
-	sum += b[0]* *(x);
-	for(i = 1; i < size; i++){
-		sum += b[i] * *(x+i) - a[i] * *(y+i);
+	for (i=1; i<order; i++)
+	{
+		*(buff+i-1) = b[i] * input - a[i] * res + *(buff+i);
 	}
-	*(y) = sum; 
-	return sum;*/
+	//Last coefficient of a and b added with no previous buffer value added.
+	*(buff+order-1) = b[order]*input - a[order]*res; 
+	return res;
 }
 
 void shift_buffer(double sample, double* buffer)
@@ -211,6 +200,8 @@ void ISR_AIC(void)
 	// filtering using IIR
 	if (filter == 1)
 		dOutput = iir_filter(dInput);
+	else if(filter == 2)
+		dOutput = iir_filter_transposed(dInput);
 	else dOutput = dInput;
 	//dOutput = iir_filter(dInput);
 	// output result to both L/R channels
