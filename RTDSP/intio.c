@@ -28,7 +28,7 @@
 #include "dsk6713_aic23.h"
 
 // MATLAB output coefficients
-#include "iir_coeff_2.txt" 
+#include "iir_coeff.txt" 
 
 // math library (trig functions)
 #include <math.h>
@@ -70,6 +70,7 @@ typedef enum { false, true } bool;
 // filter order and dynamic buffers
 short order;
 double* x;
+double *y;
 int filter = 1;
 
  /******************************* Function prototypes ********************************/
@@ -79,6 +80,7 @@ void   ISR_AIC(void);
 void   init_buffer(void);
 double iir_filter(double input);
 void   shift_buffer(double sample, double* buffer);
+double small_iir_filter(double input);
 /********************************** Main routine ************************************/
 void main()
 {
@@ -90,8 +92,10 @@ void main()
 	init_HWI();
 	
 	/* initialise buffer x */
-	order = sizeof(a)/sizeof(a[0])-1; /* Find the order of the filter. */
+	order = 2;
+	//order = sizeof(a)/sizeof(a[0])-1; /* Find the order of the filter. */
 	x = (double *)calloc(order, sizeof(double)); 
+	y = (double *)calloc(order, sizeof(double)); 
 	init_buffer();
   	 		
 	/* loop indefinitely, waiting for interrupts */  					
@@ -138,7 +142,7 @@ void init_HWI(void)
 
 /*************************** Signal processing functions ******************************/  
 
-/*double small_iir_filter(double input)
+double small_iir_filter(double input)
 {
 	*(x+1) = *(x);
 	*(x) = input;
@@ -147,14 +151,16 @@ void init_HWI(void)
 			+ b[1] * *(x+1)
 			- a[1] * *(y+1);
 	return *(y);
-}*/
+}
 
 void init_buffer(void)
 {
 	// zeroes buffer x[]
 	int i;
-	for (i=0; i<order; i++)
+	for (i=0; i<order; i++) {
 		*(x+i) = 0;
+		*(y+i) = 0;
+	}
 }
 
 double iir_filter(double input)
